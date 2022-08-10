@@ -17,7 +17,7 @@ public class Product {
     private String detail;
     private Integer price;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany
     List<Category> categories;
 
 }

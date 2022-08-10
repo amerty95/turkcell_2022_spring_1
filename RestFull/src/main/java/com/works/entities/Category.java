@@ -1,5 +1,6 @@
 package com.works.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Category {
 
     private String title;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     List<Product> products;
 }
