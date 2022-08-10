@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("/customer")
@@ -18,7 +20,7 @@ public class CustomerRestController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity save( @Valid @RequestBody Customer customer) {
+    public ResponseEntity save(@Valid @RequestBody Customer customer) {
         return cService.save(customer);
     }
 

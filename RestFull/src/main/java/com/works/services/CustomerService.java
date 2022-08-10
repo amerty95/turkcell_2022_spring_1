@@ -10,17 +10,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.*;
 
 @Service
 public class CustomerService {
 
     final CustomerRepository cRepo;
-    public CustomerService(CustomerRepository cRepo) {
+    final Random rnd1;
+    public CustomerService(CustomerRepository cRepo, Random rnd1) {
         this.cRepo = cRepo;
+        this.rnd1 = rnd1;
     }
 
     public ResponseEntity saveAll(List<Customer> customers) {
