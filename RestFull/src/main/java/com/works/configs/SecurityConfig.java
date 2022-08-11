@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .httpBasic()
         .and()
         .authorizeRequests()
+
         .antMatchers("/product/**").hasRole("product")
         .antMatchers("/note/**").hasRole("note")
         .antMatchers("/customer/**").hasRole("customer")

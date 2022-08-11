@@ -2,13 +2,13 @@ package com.works.restcontrollers;
 
 import com.works.entities.Customer;
 import com.works.services.CustomerService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+
 
 @RestController
 @RequestMapping("/customer")
@@ -29,6 +29,7 @@ public class CustomerRestController {
         return cService.saveAll( customers );
     }
 
+    @Cacheable("customerList")
     @GetMapping("/list")
     public ResponseEntity list() {
         return cService.list();

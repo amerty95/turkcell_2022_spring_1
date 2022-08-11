@@ -4,6 +4,7 @@ import com.works.entities.Customer;
 import com.works.repositories.CustomerRepository;
 import com.works.utils.ERest;
 import com.works.utils.Util;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +19,11 @@ public class CustomerService {
 
     final CustomerRepository cRepo;
     final Random rnd1;
-    public CustomerService(CustomerRepository cRepo, Random rnd1) {
+    final CacheManager cacheManager;
+    public CustomerService(CustomerRepository cRepo, Random rnd1, CacheManager cacheManager) {
         this.cRepo = cRepo;
         this.rnd1 = rnd1;
+        this.cacheManager = cacheManager;
     }
 
     public ResponseEntity saveAll(List<Customer> customers) {
@@ -40,6 +43,7 @@ public class CustomerService {
             cRepo.save(customer);
             hm.put(ERest.status, true);
             hm.put(ERest.result, customer);
+            cacheManager.getCache("customerList").clear();
             return new ResponseEntity( hm, HttpStatus.OK );
         }catch (Exception ex) {
             String message = ex.getMessage();
