@@ -8,7 +8,79 @@
 </head>
 <body>
 <div class="container">
-    <h1>Welcome Dashboard</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Person Add</h3>
+            <form method="post" action="/personAdd">
+                <div class="mb-3">
+                    <input name="name" required type="text" placeholder="Name / Surname" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <input name="email" required type="email" placeholder="E-Mail" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <input name="phone" required type="tel" placeholder="Phone" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <input name="color" required type="color" placeholder="Color" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-success">Send</button>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <h3>Person List</h3>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item : ${list}" >
+                    <th scope="row" th:text="${item.pid}" ></th>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.phone}"></td>
+                    <td th:text="${item.color}"></td>
+                    <td>
+                        <a th:href="${'/personDelete/'+item.pid}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">username</th>
+            <th scope="col">email</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="item : ${rest}">
+            <th scope="row" th:text="${item.id}" ></th>
+            <td th:text="${item.name}" ></td>
+            <td th:text="${item.username}" ></td>
+            <td th:text="${item.email}" ></td>
+        </tr>
+
+        </tbody>
+    </table>
+
 </div>
 </body>
 </html>
